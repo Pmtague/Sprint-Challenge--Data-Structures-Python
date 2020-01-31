@@ -8,7 +8,10 @@ class RingBuffer:
         self.storage = DoublyLinkedList()
 
     def append(self, item):
-        pass
+        # Is the ring buffer at capacity?
+		# If yes, change the value of the oldest node
+		# Increment current by 1
+		# If no, add the item to the next available slot
 
     def get(self):
         # Note:  This is the only [] allowed
