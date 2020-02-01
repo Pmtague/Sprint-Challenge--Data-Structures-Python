@@ -9,8 +9,10 @@ class RingBuffer:
 
     def append(self, item):
         # Is the ring buffer at capacity?
-		# If yes, change the value of the oldest node
-		# Increment current by 1
+		# If yes:
+		# 	Store the value of the current head (oldest)
+		#   Overwrite the current head with the newest value
+		#   
 		# If no, add the item to the next available slot
 
     def get(self):
