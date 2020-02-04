@@ -4,21 +4,25 @@ from doubly_linked_list import DoublyLinkedList
 class RingBuffer:
     def __init__(self, capacity):
         self.capacity = capacity
-        self.oldest = None
+        self.current = None
         self.storage = DoublyLinkedList()
 
     def append(self, item):
-        # Is the ring buffer at capacity?
-        # If yes:
-        if self.capacity == self.storage.length:
-            # 	Store the value of the current head (oldest)
-            curr_val = self.storage.head.value
-            #   Overwrite the current head with the newest value
-            self.storage.head = item
-            #   Move the oldest marker to the next element
-            self.oldest = self.storage.head.next
-        # If no, add the item to the next available slot
+        # Ring buffer is empty
+        if not self.storage.head:
+            # Set the new item as the value of the head and the tail
+            self.storage.add_to_head(item)
+        # Ring buffer full
+        elif self.storage.length == self.capacity:
+            # If so, overwrite the current oldest
+            if self.current == None:
+                self.storage.head.value = item
+                self.current = self.storage.head.next
+            else:
+                self.current.value = item
+                self.current = self.current.next
         else:
+            # Add the item to the tail (newest items)
             self.storage.add_to_tail(item)
 
     def get(self):
